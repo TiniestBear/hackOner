@@ -34,11 +34,16 @@ export class RiverFrontComponent implements OnInit {
     }
     fileReader.readAsText(this.file);
     console.log('chuj wie 2')
-    let altResponse = this.http.post<any>('https://jajaborysa.route.com/posts', { title: 'Angular POST Request Example', data: this.fileContent }).subscribe(data => {
-      this.responseContent = data;
+    const headers = {
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    }; 
+    
+    this.http.post<any>('http://localhost:3000/river', JSON.stringify(this.fileContent), {'headers': headers} ).subscribe(data => {
+      this.responseContent = JSON.parse(data);
+      console.log(this.responseContent);
     })
-
-    console.log(altResponse);
+    console.log('chuj wie 6')
   }
 
   fileContent: any[] = [];
