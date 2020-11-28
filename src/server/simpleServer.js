@@ -6,6 +6,8 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+app.use(express.json());
+
 app.use(cors())
 
 app.get('/river', function (req, res, next) {
@@ -13,8 +15,8 @@ app.get('/river', function (req, res, next) {
 })
 
 app.post('/river', function (req, res, next) {
-  console.log(req.data);
-  res.json({msg: 'This is CORS-enabled POST for all origins!'})
+  console.log('post body3 ' + req.body.gupiDebil);
+  res.json({msg: req.body})
 })
 
 app.listen(3000, function () {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-river-front',
@@ -23,27 +23,29 @@ export class RiverFrontComponent implements OnInit {
   uploadDocument(file) {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      console.log('chuj wie 3')
       console.log(fileReader.result);
       this.fileContent = (fileReader.result as string).split('\n');
       this.fileContent = this.fileContent.map((line) => {
         return line.split(', ');
       })
       this.fileContent.splice(-1, 1);
-      console.log(this.fileContent)
+      console.log(this.fileContent);
+      console.log('chuj wie 7')
+
+      let bodyObj = {'gupiDebil': this.fileContent};
+      console.log(bodyObj);
+
+      this.http.post<any>('http://localhost:3000/river', bodyObj, {'headers': headers} ).subscribe(data => {
+        this.responseContent = data;
+        console.log(this.responseContent);
+      })
+      console.log('chuj wie 6')
     }
     fileReader.readAsText(this.file);
-    console.log('chuj wie 2')
     const headers = {
       'content-type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-    }; 
-    
-    this.http.post<any>('http://localhost:3000/river', JSON.stringify(this.fileContent), {'headers': headers} ).subscribe(data => {
-      this.responseContent = JSON.parse(data);
-      console.log(this.responseContent);
-    })
-    console.log('chuj wie 6')
+    };
   }
 
   fileContent: any[] = [];
