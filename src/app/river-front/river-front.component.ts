@@ -30,16 +30,13 @@ export class RiverFrontComponent implements OnInit {
       })
       this.fileContent.splice(-1, 1);
       console.log(this.fileContent);
-      console.log('chuj wie 7')
 
       let bodyObj = {'gupiDebil': this.fileContent};
       console.log(bodyObj);
 
       this.http.post<any>('http://localhost:3000/river', bodyObj, {'headers': headers} ).subscribe(data => {
-        this.responseContent = data;
-        console.log(this.responseContent);
+        this.responseContent = data.msg.gupiDebil;  
       })
-      console.log('chuj wie 6')
     }
     fileReader.readAsText(this.file);
     const headers = {
