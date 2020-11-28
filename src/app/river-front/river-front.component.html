@@ -1,0 +1,38 @@
+<p>river-front works!</p>
+<div class="Block">
+    <label id="lbl">Code </label>
+    <input type='file' (change)="fileChanged($event)">
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Dupy</th>
+        <th scope="col">Jaja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let elem of fileContent; let ind = index">
+        <th scope="row">{{ind}}</th>
+        <td>{{elem[0]}}</td>
+        <td>{{elem[1]}}</td>
+      </tr>
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Dupy resp</th>
+        <th scope="col">Jaja resp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let elem of responseContent; let ind = index">
+        <th scope="row">{{ind}}</th>
+        <td>{{elem[0]}}</td>
+        <td>{{elem[1]}}</td>
+      </tr>
+    </tbody>
+</table>
